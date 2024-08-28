@@ -21,7 +21,6 @@ public class CheckoutServiceImplementation implements CheckoutService {
 	
 	public CheckoutServiceImplementation(CustomerRepository customerRepository) {
 		this.customerRepository = customerRepository;
-		
 	}
 	@Override
 	@Transactional

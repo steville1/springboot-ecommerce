@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
@@ -14,7 +13,6 @@ import com.tastefultreasure.ecommerce.entity.Country;
 import com.tastefultreasure.ecommerce.entity.Product;
 import com.tastefultreasure.ecommerce.entity.ProductCategory;
 import com.tastefultreasure.ecommerce.entity.State;
-import com.tastefultreasure.ecommerce.entity.TestTable;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.metamodel.EntityType;
@@ -25,7 +23,6 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
 
     private EntityManager entityManager;
 
-    @Autowired
     public MyDataRestConfig(EntityManager theEntityManager) {
         entityManager = theEntityManager;
     }
@@ -57,7 +54,7 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
                 .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions));
 	}
 
-    private void exposeIds(RepositoryRestConfiguration config) {
+	private void exposeIds(RepositoryRestConfiguration config) {
 
         // expose entity ids
         //

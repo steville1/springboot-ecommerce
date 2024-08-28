@@ -1,11 +1,5 @@
 package com.tastefultreasure.ecommerce.entity;
 
-
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -112,7 +106,7 @@ public class Product {
         return imageUrl;
     }
 
-    // Setter for 'sku'
+    // Setter for sku
     public void setSku(String sku) {
         this.sku = sku;
     }
