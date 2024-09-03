@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.tastefultreasure.ecommerce.entity.ProductCategory;
 
-@CrossOrigin("http://localhost:4200")
 //@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RepositoryRestResource(collectionResourceRel = "productCategory", path="product-category")
 public interface ProductCategoryRepository extends JpaRepository<ProductCategory, Long> {
