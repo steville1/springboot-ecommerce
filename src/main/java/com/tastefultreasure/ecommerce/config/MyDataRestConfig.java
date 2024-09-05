@@ -12,6 +12,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 import com.tastefultreasure.ecommerce.entity.Country;
+import com.tastefultreasure.ecommerce.entity.Order;
 import com.tastefultreasure.ecommerce.entity.Product;
 import com.tastefultreasure.ecommerce.entity.ProductCategory;
 import com.tastefultreasure.ecommerce.entity.State;
@@ -44,10 +45,12 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
         disableHttpMethods(Product.class, config, theUnsupportedActions);
         // disable HTTP methods for ProductCategory: PUT, POST and DELETE
         disableHttpMethods(ProductCategory.class, config, theUnsupportedActions);
-        // disable HTTP methods for ProductCategory: PUT, POST and DELETE
+        // disable HTTP methods for Country: PUT, POST and DELETE
         disableHttpMethods(Country.class, config, theUnsupportedActions);
-        // disable HTTP methods for ProductCategory: PUT, POST and DELETE
+        // disable HTTP methods for State: PUT, POST and DELETE
         disableHttpMethods(State.class, config, theUnsupportedActions);
+        // disable HTTP methods for Order: PUT, POST and DELETE
+        disableHttpMethods(Order.class, config, theUnsupportedActions);
 
         // call an internal helper method
         exposeIds(config);
