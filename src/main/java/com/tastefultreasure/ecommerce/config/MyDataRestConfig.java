@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
@@ -20,9 +22,14 @@ import jakarta.persistence.metamodel.EntityType;
 
 @Configuration
 public class MyDataRestConfig implements RepositoryRestConfigurer {
+	
+	@Value("${allowed.origins}")
+	//private String[] theAllowedOrigins;
+	private String allowedOrigins;
 
     private EntityManager entityManager;
 
+    @Autowired
     public MyDataRestConfig(EntityManager theEntityManager) {
         entityManager = theEntityManager;
     }
@@ -46,7 +53,10 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
         exposeIds(config);
         
         //configure cors mapping
-        cors.addMapping("/api/**").allowedOrigins("http://localhost:4200");
+        //cors.addMapping(config.getBasePath()+ "**").allowedOrigins(theAllowedOrigins);
+        // Configure CORS mapping
+        cors.addMapping(config.getBasePath() + "/**")
+            .allowedOrigins(allowedOrigins.split(","));
     }
 
 

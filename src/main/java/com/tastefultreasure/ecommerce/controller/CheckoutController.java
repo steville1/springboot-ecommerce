@@ -1,6 +1,6 @@
 package com.tastefultreasure.ecommerce.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
+//import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +10,7 @@ import com.tastefultreasure.ecommerce.dto.Purchase;
 import com.tastefultreasure.ecommerce.dto.PurchaseResponse;
 import com.tastefultreasure.ecommerce.service.CheckoutService;
 
-@CrossOrigin("http://localhost:4200")
+//@CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/api/checkout")
 public class CheckoutController {
