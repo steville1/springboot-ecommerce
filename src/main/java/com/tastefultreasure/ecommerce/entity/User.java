@@ -42,4 +42,58 @@ public class User {
 	            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
 	    )
 	 private Set<Role> roles;
+	 
+	// Getter and Setter for id
+	    public Long getId() {
+	        return id;
+	    }
+
+	    public void setId(Long id) {
+	        this.id = id;
+	    }
+
+	    // Getter and Setter for name
+	    public String getName() {
+	        return name;
+	    }
+
+	    public void setName(String name) {
+	        this.name = name;
+	    }
+
+	    // Getter and Setter for username
+	    public String getUsername() {
+	        return username;
+	    }
+
+	    public void setUsername(String username) {
+	        this.username = username;
+	    }
+
+	    // Getter and Setter for email
+	    public String getEmail() {
+	        return email;
+	    }
+
+	    public void setEmail(String email) {
+	        this.email = email;
+	    }
+
+	    // Getter and Setter for password
+	    public String getPassword() {
+	        return password;
+	    }
+
+	    public void setPassword(String password) {
+	        this.password = password;
+	    }
+
+	    // Getter and Setter for roles
+	    public Set<Role> getRoles() {
+	        return roles;
+	    }
+
+	    public void setRoles(Set<Role> roles) {
+	        this.roles = roles;
+	    }
 }

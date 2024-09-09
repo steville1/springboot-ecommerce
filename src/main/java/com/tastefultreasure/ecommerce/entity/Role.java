@@ -22,5 +22,25 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    
+    //getter for Id
+    public long getId() {
+    	return id;
+    }
+    
+    //setter for Id
+    public void setId(Long id) {
+    	this.id = id;
+    }
+    
+    //getter for name
+    public String getName() {
+    	return name;
+    }
+    
+    //setter for name
+    public void setName(String name) {
+    	this.name = name;
+    }
 }
 
