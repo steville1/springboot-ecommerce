@@ -5,6 +5,8 @@ import org.springframework.security.core.Authentication;
 import java.security.Key;
 import java.util.Date;
 
+import javax.crypto.SecretKey;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -32,10 +34,12 @@ public class JwtTokenProvider {
 
         Date expireDate = new Date(currentDate.getTime() + jwtExpirationDate);
 
-        String token = Jwts.builder()
-                .setSubject(username)
-                .setIssuedAt(new Date())
-                .setExpiration(expireDate)
+        String token = Jwts.builder().
+        		claims()
+        		.subject(username)
+        		.issuedAt(new Date())
+        		.expiration(expireDate)
+        		.and()
                 .signWith(key())
                 .compact();
         return token;
@@ -49,11 +53,12 @@ public class JwtTokenProvider {
 
     // get username from Jwt token
     public String getUsername(String token){
-        Claims claims = Jwts.parserBuilder()
-                .setSigningKey(key())
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
+    	Claims claims = Jwts.parser()
+    	        .verifyWith((SecretKey) key())
+    	        .build()
+    	        .parseSignedClaims(token)
+    	        .getPayload();
+                 
         String username = claims.getSubject();
         return username;
     }
@@ -61,10 +66,11 @@ public class JwtTokenProvider {
     // validate Jwt token
     public boolean validateToken(String token){
         try{
-            Jwts.parserBuilder()
-                    .setSigningKey(key())
-                    .build()
-                    .parse(token);
+        	Jwts.parser()
+        	        .verifyWith((SecretKey) key())
+        	        .build()
+        	        .parseSignedClaims(token)
+        	        .getPayload();
             return true;
         } catch (MalformedJwtException ex) {
             throw new TasteFulTreasureException(HttpStatus.BAD_REQUEST, "Invalid JWT token");

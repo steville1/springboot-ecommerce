@@ -9,6 +9,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import com.tastefultreasure.ecommerce.dao.RoleRepository;
 import com.tastefultreasure.ecommerce.dao.UserRepository;
@@ -19,6 +20,7 @@ import com.tastefultreasure.ecommerce.payload.LoginDto;
 import com.tastefultreasure.ecommerce.payload.RegisterDto;
 import com.tastefultreasure.ecommerce.security.JwtTokenProvider;
 
+@Service
 public class AuthServiceImplementation implements AuthService {
 
     private AuthenticationManager authenticationManager;
@@ -73,8 +75,8 @@ public class AuthServiceImplementation implements AuthService {
         user.setPassword(passwordEncoder.encode(registerDto.getPassword()));
 
         Set<Role> roles = new HashSet<>();
-        Role userRole = roleRepository.findByName("ROLE_USER").get();
-        roles.add(userRole);
+        //Role userRole = roleRepository.findByName("ROLE_USER").get();
+       // roles.add(userRole);
         user.setRoles(roles);
 
         userRepository.save(user);

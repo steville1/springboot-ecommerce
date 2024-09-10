@@ -18,6 +18,14 @@ public class MyAppConfig implements WebMvcConfigurer {
 		//set up cors mapping
 		cors.addMapping(basePath + "/**").allowedOrigins(theAllowedOrigins);
 	}
-	
+	// Getter for theAllowedOrigins
+    public String[] getTheAllowedOrigins() {
+        return theAllowedOrigins;
+    }
+
+    // Getter for basePath (if needed)
+    public String getBasePath() {
+        return basePath;
+    }
 
 }
