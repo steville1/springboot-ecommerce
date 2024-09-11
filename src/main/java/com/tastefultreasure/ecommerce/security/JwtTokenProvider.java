@@ -25,6 +25,16 @@ public class JwtTokenProvider {
 
     @Value("${app-jwt-expiration-milliseconds}")
     private long jwtExpirationDate;
+    
+    // Getter for jwtSecret
+    public String getJwtSecret() {
+        return jwtSecret;
+    }
+
+    // Getter for jwtExpirationDate
+    public long getJwtExpirationDate() {
+        return jwtExpirationDate;
+    }
 
     // generate JWT token
     public String generateToken(Authentication authentication){
@@ -35,11 +45,10 @@ public class JwtTokenProvider {
         Date expireDate = new Date(currentDate.getTime() + jwtExpirationDate);
 
         String token = Jwts.builder().
-        		claims()
+        		claims().and()
         		.subject(username)
         		.issuedAt(new Date())
         		.expiration(expireDate)
-        		.and()
                 .signWith(key())
                 .compact();
         return token;
