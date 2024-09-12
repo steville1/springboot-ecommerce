@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.tastefultreasure.ecommerce.entity.Product;
 
-@CrossOrigin("http://localhost:4200")
+//@CrossOrigin("http://localhost:4200")
 @RepositoryRestResource(collectionResourceRel = "products", path="products")
 public interface ProductRepository extends JpaRepository<Product, Long> {
 

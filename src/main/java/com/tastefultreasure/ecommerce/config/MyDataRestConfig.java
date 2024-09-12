@@ -25,7 +25,6 @@ import jakarta.persistence.metamodel.EntityType;
 public class MyDataRestConfig implements RepositoryRestConfigurer {
 	
 	@Value("${allowed.origins}")
-	//private String[] theAllowedOrigins;
 	private String allowedOrigins;
 
     private EntityManager entityManager;
@@ -59,7 +58,7 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
         //cors.addMapping(config.getBasePath()+ "**").allowedOrigins(theAllowedOrigins);
         // Configure CORS mapping
         cors.addMapping(config.getBasePath() + "/**")
-            .allowedOrigins(allowedOrigins.split(","));
+            .allowedOrigins(getAllowedOrigins());
     }
 
 
@@ -89,5 +88,10 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
         // - expose the entity ids for the array of entity/domain types
         Class[] domainTypes = entityClasses.toArray(new Class[0]);
         config.exposeIdsFor(domainTypes);
+    }
+	
+	 // Getter for allowedOrigins
+    public String[] getAllowedOrigins() {
+        return allowedOrigins.split(",");
     }
 }
