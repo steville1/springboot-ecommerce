@@ -11,6 +11,7 @@ import lombok.Setter;
 public class JWTAuthResponse {
 	
 	private String accessToken;
+	private String email;
     private String tokenType = "Bearer";
 
     // Getter for accessToken
@@ -31,6 +32,16 @@ public class JWTAuthResponse {
     // Setter for tokenType
     public void setTokenType(String tokenType) {
         this.tokenType = tokenType;
+    }
+    
+    // Getter for email
+    public String getEmail() {
+        return email;
+    }
+
+    // Setter for tokenType
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 }

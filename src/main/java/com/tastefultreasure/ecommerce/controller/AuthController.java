@@ -28,6 +28,7 @@ public class AuthController {
         String token = authService.login(loginDto);
 
         JWTAuthResponse jwtAuthResponse = new JWTAuthResponse();
+        jwtAuthResponse.setEmail(loginDto.getUsernameOrEmail());
         jwtAuthResponse.setAccessToken(token);
 
         return ResponseEntity.ok(jwtAuthResponse);
