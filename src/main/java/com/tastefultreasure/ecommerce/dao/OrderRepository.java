@@ -11,14 +11,14 @@ import com.tastefultreasure.ecommerce.entity.Order;
 
 @RepositoryRestResource
 public interface OrderRepository extends JpaRepository<Order, Long> {
-	Page<Order> findByCustomerEmail(@Param("email") String email, Pageable pageable);
+	Page<Order> findByCustomerEmailOrderByDateCreatedDesc(@Param("email") String email, Pageable pageable);
 	/**Behind the scene query
 	 
 	 Select * from orders
 	 LEFT OUTER JOIN customer
 	 ON orders.customer_id = customer.id
 	 WHERE customer.email = :email
-
+	 ORDER BY orders.date_created DESC
 	 * 
 	 */
 

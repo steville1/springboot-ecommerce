@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
 
 import com.tastefultreasure.ecommerce.security.JwtAuthenticationEntryPoint;
 import com.tastefultreasure.ecommerce.security.JwtAuthenticationFilter;
@@ -48,10 +49,14 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        http.csrf(csrf -> csrf.disable())
+    	http.csrf(csrf -> csrf.disable()) // Disable CSRF protection for stateless APIs
+        .cors(cors -> cors.configurationSource(request -> 
+            new CorsConfiguration().applyPermitDefaultValues()
+        )) // Enable CORS with default settings
                 .authorizeHttpRequests((authorize) ->
                         //authorize.anyRequest().authenticated()
-                        authorize.requestMatchers(HttpMethod.GET, "/api/**").permitAll()
+                       authorize.requestMatchers(HttpMethod.GET, "/api/**").permitAll()
+                       			//.requestMatchers(HttpMethod.POST, "/api/**").permitAll()
                                 .requestMatchers("/api/auth/**").permitAll()
                                 .anyRequest().authenticated()
 

@@ -14,9 +14,12 @@ public class MyAppConfig implements WebMvcConfigurer {
 	private String basePath;
 	
 	@Override
-	public void addCorsMappings(CorsRegistry cors) {
-		//set up cors mapping
-		cors.addMapping(basePath + "/**").allowedOrigins(theAllowedOrigins);
+	public void addCorsMappings(CorsRegistry registry) {
+	        registry.addMapping("/**")
+	                .allowedOrigins(getTheAllowedOrigins())
+	                .allowedMethods("*")
+	                .allowedHeaders("*")
+	                .allowCredentials(true);
 	}
 	// Getter for theAllowedOrigins
     public String[] getTheAllowedOrigins() {
@@ -27,5 +30,4 @@ public class MyAppConfig implements WebMvcConfigurer {
     public String getBasePath() {
         return basePath;
     }
-
 }
