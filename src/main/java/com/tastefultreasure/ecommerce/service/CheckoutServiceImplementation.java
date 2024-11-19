@@ -1,11 +1,20 @@
 package com.tastefultreasure.ecommerce.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.stripe.Stripe;
+import com.stripe.exception.StripeException;
+import com.stripe.model.PaymentIntent;
 import com.tastefultreasure.ecommerce.dao.CustomerRepository;
+import com.tastefultreasure.ecommerce.dto.PaymentInfo;
 import com.tastefultreasure.ecommerce.dto.Purchase;
 import com.tastefultreasure.ecommerce.dto.PurchaseResponse;
 import com.tastefultreasure.ecommerce.entity.Customer;
@@ -19,8 +28,10 @@ public class CheckoutServiceImplementation implements CheckoutService {
 	
 	private CustomerRepository customerRepository;
 	
-	public CheckoutServiceImplementation(CustomerRepository customerRepository) {
+	public CheckoutServiceImplementation(CustomerRepository customerRepository, @Value("${stripe.key.secret}") String secretKey) {
 		this.customerRepository = customerRepository;
+		 // initialize Stripe API with secret key
+        Stripe.apiKey = secretKey;
 	}
 	@Override
 	@Transactional
@@ -67,5 +78,17 @@ public class CheckoutServiceImplementation implements CheckoutService {
         // For details see: https://en.wikipedia.org/wiki/Universally_unique_identifier
         return UUID.randomUUID().toString();
     }
+	@Override
+	public PaymentIntent createPaymentIntent(PaymentInfo paymentInfo) throws StripeException {
+		List<String> paymentMethodTypes = new ArrayList<>();
+        paymentMethodTypes.add("card");
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("amount", paymentInfo.getAmount());
+        params.put("currency", paymentInfo.getCurrency());
+        params.put("payment_method_types", paymentMethodTypes);
+
+        return PaymentIntent.create(params);
+	}
 
 }
